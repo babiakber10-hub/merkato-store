@@ -1,11 +1,14 @@
+import type { Product } from '../App';
+
 interface ProductCardProps {
-  name: string;
-  price: number;
-  image: string;
+  product: Product;
+  onAddToCart: (product: Product) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ name, price, image }) => {
-  return (  
+export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+  const { name, price, image } = product;
+
+  return (
     <div className="product-card">
       <div className="product-image-wrapper">
         <img src={image} alt={name} className="product-image" />
@@ -13,7 +16,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ name, price, image }) 
       <div className="product-details">
         <h2>{name}</h2>
         <p>${price.toFixed(2)}</p>
-        <button type="button" className="product-button" onClick={() => alert(`${name} added to cart`)}>
+        <button type="button" className="product-button" onClick={() => onAddToCart(product)}>
           Add to cart
         </button>
       </div>
